@@ -14,6 +14,7 @@ export default function CreateTournamentView() {
         gap: "16px",
         display: "flex",
         flexDirection: "column",
+        margin: "auto",
       }}
     >
       <h1>Create a Tournament</h1>

@@ -1,30 +1,47 @@
-"use client";
+"use client"; // This component will render on the client side, required when using React hooks
 
-import { Button, Flex, TextField } from "@radix-ui/themes";
+import { Button, Flex } from "@radix-ui/themes";
 import { useState } from "react";
 
+/**
+ * A component which contains the form to create a tournament
+ * @returns The form to create a tournament
+ */
 export default function CreateTournamentForm() {
+  // State to store the input fields as a single object to limit the amount of state variables
   const [inputFields, setInputFields] = useState({
     name: "",
     start_date: "",
     start_time: "",
     location: "",
-    playing_fields: 0,
+    playing_fields: 1,
     time_between_matches: 0,
   });
 
+  // Function to update the state when the input fields change
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setInputFields({ ...inputFields, [e.target.name]: e.target.value });
   }
 
+  // Function to handle the form submission
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+    e.preventDefault(); // Prevent the default form submission, which would cause a page reload
     console.log(inputFields);
   }
 
+  // Common styles for the labels
   const labelStyle = {
     fontWeight: "500",
     color: "var(--text-color)",
+  };
+
+  // Common styles for the input fields
+  const inputStyle = {
+    color: "var(--text-color)",
+    padding: "14px",
+    borderRadius: "8px",
+    backgroundColor: "var(--input-color)",
+    border: "1px solid var(--border-color)",
   };
 
   return (
@@ -51,7 +68,8 @@ export default function CreateTournamentForm() {
               name="name"
               value={inputFields.name}
               onChange={handleChange}
-              className="px-2 py-1 rounded border w-full"
+              placeholder="Enter the name of the tournament"
+              style={inputStyle}
             />
           </div>
 
@@ -65,7 +83,7 @@ export default function CreateTournamentForm() {
               type="date"
               value={inputFields.start_date}
               onChange={handleChange}
-              className="px-2 py-1 rounded border w-full"
+              style={inputStyle}
             />
           </div>
 
@@ -79,7 +97,7 @@ export default function CreateTournamentForm() {
               type="time"
               value={inputFields.start_time}
               onChange={handleChange}
-              className="px-2 py-1 rounded border w-full"
+              style={inputStyle}
             />
           </div>
 
@@ -90,9 +108,10 @@ export default function CreateTournamentForm() {
             <input
               id="location"
               name="location"
+              placeholder="Enter the location of the tournament"
               value={inputFields.location}
               onChange={handleChange}
-              className="px-2 py-1 rounded border w-full"
+              style={inputStyle}
             />
           </div>
 
@@ -106,7 +125,8 @@ export default function CreateTournamentForm() {
               type="number"
               value={inputFields.playing_fields}
               onChange={handleChange}
-              className="px-2 py-1 rounded border w-full"
+              style={inputStyle}
+              placeholder="Enter the number of playing fields"
             />
           </div>
 
@@ -120,26 +140,26 @@ export default function CreateTournamentForm() {
               type="number"
               value={inputFields.time_between_matches}
               onChange={handleChange}
-              className="px-2 py-1 rounded border w-full"
+              style={inputStyle}
             />
           </div>
         </div>
 
-        <Button style={{ width: "fit-content" }} type="submit">
+        <Button
+          style={{
+            width: "fit-content",
+            backgroundColor: "var(--submit-button-color)",
+            color: "var(--text-color)",
+            border: "1px solid var(--border-color)",
+            padding: "16px",
+            borderRadius: "16px",
+            fontSize: "16px",
+          }}
+          type="submit"
+        >
           Create Tournament
         </Button>
       </Flex>
     </form>
   );
 }
-/**
-  export type Tournament = {
-  tournament_id: number;
-  name: string;
-  start_date: string;
-  start_time: string;
-  location: string;
-  playing_fields: number;
-  time_between_matches: number;
-};
-  */
