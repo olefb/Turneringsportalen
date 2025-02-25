@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Theme } from "@radix-ui/themes";
+import { ThemeProvider}  from "next-themes";
 
-import Nav from "../components/nav";
+import Nav from "@/components/nav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,27 +27,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ colorScheme: "light dark" }}>
-      <body
-        style={{
-          backgroundColor: "var(--background)",
-          width: "100%",
-          height: "100%",
-          margin: 0,
-          minHeight: "100vh",
-        }}
-      >
-        <Theme
-          accentColor="sky"
-          grayColor="gray"
-          panelBackground="solid"
-          scaling="100%"
-          radius="full"
-          appearance="inherit"
+    <html lang="en" suppressHydrationWarning>
+      <head/>
+      <body>
+        <ThemeProvider 
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-          <Nav />
-          {children}
-        </Theme>
+          <Theme
+            accentColor="sky"
+            grayColor="gray"
+            panelBackground="solid"
+            scaling="100%"
+            radius="full"
+          >
+            <Nav/>
+            {children}
+          </Theme>
+        </ThemeProvider>
       </body>
     </html>
   );
