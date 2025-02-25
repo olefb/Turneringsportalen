@@ -13,21 +13,32 @@ jobs:
       contents: read
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
-      with:
-        java-version: '21'
-        distribution: 'temurin'
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
-      with:
-        build-root-directory: backend  # Set the working directory for Gradle
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
 
-    - name: Build with Gradle Wrapper
-      run: ./gradlew build
-      working-directory: backend  # Run Gradle commands inside the backend folder
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+        with:
+          build-root-directory: backend  # Set the working directory for Gradle
+
+      - name: Set environment variables from GitHub Secrets
+        run: |
+          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> $GITHUB_ENV
+          echo "SUPABASE_KEY=${{ secrets.SUPABASE_KEY }}" >> $GITHUB_ENV
+
+      - name: Debug Environment Variables (Optional)
+        run: env | grep SUPABASE
+        continue-on-error: true  # Avoid breaking the build due to missing env vars
+
+      - name: Build with Gradle Wrapper
+        run: ./gradlew build
+        working-directory: backend  # Run Gradle commands inside the backend folder
 
   dependency-submission:
     runs-on: ubuntu-latest
@@ -35,14 +46,16 @@ jobs:
       contents: write
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
-      with:
-        java-version: '21'
-        distribution: 'temurin'
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Generate and submit dependency graph
-      uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
-      with:
-        build-root-directory: backend  # Set working directory for dependency submission
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Generate and submit dependency graph
+        uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+        with:
+          build-root-directory: backend  # Set working directory for dependency submission
