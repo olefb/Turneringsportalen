@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Theme } from "@radix-ui/themes";
 
+import Nav from "../components/nav";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,15 +26,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" style={{ colorScheme: "light dark" }}>
+      <body
+        style={{
+          backgroundColor: "var(--background)",
+          width: "100%",
+          height: "100%",
+          margin: 0,
+          minHeight: "100vh",
+        }}
+      >
         <Theme
           accentColor="sky"
           grayColor="gray"
           panelBackground="solid"
           scaling="100%"
           radius="full"
+          appearance="inherit"
         >
+          <Nav />
           {children}
         </Theme>
       </body>
