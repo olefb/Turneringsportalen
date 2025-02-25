@@ -7,6 +7,7 @@ export default function Nav() {
       <Link href="/">TurneringsApp</Link>
       <Link href="/test">Test</Link>
       <Link href="/tournament">Tournament</Link>
+      <Link href="/tournaments/create">Create tournament</Link>
     </nav>
   );
 }
