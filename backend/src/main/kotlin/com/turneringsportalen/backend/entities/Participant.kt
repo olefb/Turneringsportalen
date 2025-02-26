@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Participant(
         val participantId: Int,
-        val name: String,
-        val participatesIn: Tournament
+        val participatesIn: Int,
+        val name: String
 )
