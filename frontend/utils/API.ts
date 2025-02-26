@@ -1,6 +1,8 @@
 /**
- * This file contains the functions to fetch data from the server
+ * This file contains the functions to communicate with the server
  */
+
+import { TournamentNoID } from "./types";
 
 const API_URL = "http://localhost:8080";
 
@@ -29,4 +31,23 @@ export async function fetchTournamentById(id: number) {
   });
   const data = await response.json();
   return data;
+}
+
+/**
+ * Function to send a POST request to the server to create a tournament
+ * @param data The tournament object being created
+ *
+ */
+export async function createTournament(data: TournamentNoID) {
+  const response = await fetch(`${API_URL}/tournaments`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create tournament");
+  }
 }
