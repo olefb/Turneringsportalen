@@ -1,8 +1,10 @@
+import RegisterForTournamentView from "@/components/registerForTournament/RegisterForTournamentView";
+import React from "react";
+
 export default function TournamentRegistrationPage() {
-  return (
-    <div>
-      <h1>Register for Tournament</h1>
-      <p>Here is the registration form</p>
-    </div>
-  );
+    return (
+        <React.Fragment>
+            <RegisterForTournamentView />
+        </React.Fragment>
+    );
 }
