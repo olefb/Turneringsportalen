@@ -9,7 +9,10 @@ const API_URL = "http://localhost:8080";
  * @returns The list of tournaments
  */
 export async function fetchTournaments() {
-  const response = await fetch(`${API_URL}/tournaments`);
+  const response = await fetch(`${API_URL}/tournaments`, {
+    method: "GET",
+    cache: "no-store", // TEMP FOR TESTING, (MAYBE REMOVE LATER)
+  });
   const data = await response.json();
   return data;
 }
@@ -20,7 +23,10 @@ export async function fetchTournaments() {
  * @returns The tournament with the given id
  */
 export async function fetchTournamentById(id: number) {
-  const response = await fetch(`${API_URL}/tournaments/${id}`);
+  const response = await fetch(`${API_URL}/tournaments/${id}`, {
+    method: "GET",
+    cache: "no-store", // TEMP FOR TESTING
+  });
   const data = await response.json();
   return data;
 }
