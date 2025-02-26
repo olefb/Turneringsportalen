@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Match(
         val matchId : Int,
-        val participants : MutableSet<Participant> = mutableSetOf(), // Might have to be changed  based on supabase
+        val tournamentID : Int,
         val time : Instant,
-        val gameLocation : String
+        val gameLocationId : Int
 )
