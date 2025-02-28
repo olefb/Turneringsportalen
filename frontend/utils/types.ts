@@ -1,11 +1,16 @@
 export type Tournament = {
   tournament_id: number;
   name: string;
-  start_date: string;
-  start_time: string;
+  start_date: Date;
   location: string;
-  playing_fields: number;
-  time_between_matches: number;
+  fields: TournamentField[];
+  match_interval: number;
+};
+
+export type TournamentField = {
+  field_id: number;
+  tournament_id: number;
+  field_name: string;
 };
 
 export type Participant = {
@@ -16,12 +21,15 @@ export type Participant = {
 
 export type Match = {
   match_id: number;
-  participant1: number;
-  participant2: number;
-  time: string;
-  date: Date;
-  game_location: string;
+  time: Date;
+  game_location_id: number;
   tournament_id: number;
+};
+
+export type MatchParticipant = {
+  match_id: number;
+  participant_id: number;
+  index: number;
 };
 
 export type MatchWithParticipantsAndTournament = Match & {
@@ -37,14 +45,8 @@ export type TournamentWithParticipantsAndMatches = Tournament & {
 
 export type TournamentNoID = {
   name: string;
-  startDate: Date;
+  start_date: Date;
   location: string;
   fields: TournamentField[];
-  matchInterval: number;
-};
-
-export type TournamentField = {
-  fieldId: number;
-  tournamentId: number;
-  fieldName: string;
+  match_interval: number;
 };
