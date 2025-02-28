@@ -1,14 +1,14 @@
 package com.turneringsportalen.backend.entities
 
 import kotlinx.datetime.Instant
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Tournament(
-        val tournamentId : Int,
+        @SerialName("tournament_id") val tournamentId : Int,
         val name : String,
-        val startDate : Instant, // Compact these two into one?
-        val startTime : Instant,
+        @SerialName("start_date") val startDate : Instant,
         val location : String,
-        val matchInterval : String
+        @SerialName("match_interval") val matchInterval : Int
 )
