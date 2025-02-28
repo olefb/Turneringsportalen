@@ -34,3 +34,17 @@ export type TournamentWithParticipantsAndMatches = Tournament & {
   participants: Participant[];
   matches: Match[];
 };
+
+export type TournamentNoID = {
+  name: string;
+  startDate: Date;
+  location: string;
+  fields: TournamentField[];
+  matchInterval: number;
+};
+
+export type TournamentField = {
+  fieldId: number;
+  tournamentId: number;
+  fieldName: string;
+};
