@@ -10,10 +10,9 @@ export default function Nav() {
   const pathname = usePathname();
   return (
     <React.Fragment>
-
           <TabNav.Root >
             <TabNav.Link active={pathname === '/'} href="/">
-              TurneringsApp
+              Home
             </TabNav.Link>
             <TabNav.Link active={pathname === '/tournaments/create'} href="/tournaments/create">
               Create Tournament
@@ -28,9 +27,7 @@ export default function Nav() {
               Register for tournament (temp)
             </TabNav.Link>
           </TabNav.Root>
-
     </React.Fragment>
-
   );
 }
 
