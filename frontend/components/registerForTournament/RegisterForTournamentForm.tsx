@@ -4,7 +4,7 @@ import React from "react";
 import { Button, Flex } from "@radix-ui/themes";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import {Tournament} from "@/utils/types";
+import { Tournament } from "@/utils/types"; // Import the Tournament type
 
 /**
  * A component which contains the form to register for a tournament
