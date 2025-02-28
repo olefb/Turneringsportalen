@@ -1,8 +1,8 @@
 plugins {
-	kotlin("jvm") version "2.1.0"
-	kotlin("plugin.spring") version "2.1.0"
-	kotlin("plugin.serialization") version "2.1.0"
-	id("org.springframework.boot") version "3.4.2"
+	kotlin("jvm") version "2.1.10"
+	kotlin("plugin.spring") version "2.1.10"
+	kotlin("plugin.serialization") version "2.1.10"
+	id("org.springframework.boot") version "3.4.3"
 	id("io.spring.dependency-management") version "1.1.7"
 }
 
@@ -27,7 +27,7 @@ dependencies {
 	implementation(platform("io.github.jan-tennert.supabase:bom:3.1.1"))
 	implementation("io.github.jan-tennert.supabase:postgrest-kt")
 
-	implementation("io.ktor:ktor-client-cio:3.0.0-rc-1")
+	implementation("io.ktor:ktor-client-cio:3.1.1")
 
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
