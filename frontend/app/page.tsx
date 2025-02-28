@@ -10,12 +10,7 @@ import {
   Section,
   Separator,
 } from "@radix-ui/themes";
-import {
-  ArrowDownIcon,
-  FaceIcon,
-  ImageIcon,
-  SunIcon,
-} from "@radix-ui/react-icons";
+import { ArrowDownIcon } from "@radix-ui/react-icons";
 
 export default function Page() {
   return (
