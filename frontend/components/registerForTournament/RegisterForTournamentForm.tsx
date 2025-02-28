@@ -4,6 +4,7 @@ import React from "react";
 import { Button, Flex } from "@radix-ui/themes";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
+import {Tournament} from "@/utils/types";
 
 /**
  * A component which contains the form to register for a tournament
@@ -15,7 +16,7 @@ export default function RegisterForTournamentForm() {
     const tournamentId = params.tournament_id;
 
     // State to store the tournament details (to display in the form)
-    const [tournamentDetails, setTournamentDetails] = useState<any>(null);
+    const [tournamentDetails, setTournamentDetails] = useState<Tournament | null>(null);
     const [loading, setLoading] = useState(true);
 
     // State to store the input fields as a single object to limit the amount of state variables
@@ -36,11 +37,13 @@ export default function RegisterForTournamentForm() {
                 // Use frontend/utils/API.ts
 
                 // Mocking the tournament data for now
-                const mockData = {
-                    id: tournamentId,
+                const mockData: Tournament = {
+                    tournament_id: Number(tournamentId),
                     name: "ABC-turnering",
-                    start_date: "2025-03-01",
+                    start_date: new Date("2025-03-01"),
                     location: "Brann stadion",
+                    fields: [],
+                    match_interval: 30
                 };
 
                 setTournamentDetails(mockData);
@@ -112,7 +115,7 @@ export default function RegisterForTournamentForm() {
             {tournamentDetails && (
                 <div style={{ marginBottom: "20px" }}>
                     <h2 style={{ marginBottom: "8px" }}>{tournamentDetails.name}</h2>
-                    <p style={{ marginBottom: "4px" }}>Date: {tournamentDetails.start_date}</p>
+                    <p style={{ marginBottom: "4px" }}>Date: {tournamentDetails.start_date.toISOString().split('T')[0]}</p>
                     <p>Location: {tournamentDetails.location}</p>
                 </div>
             )}
