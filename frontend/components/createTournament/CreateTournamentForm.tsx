@@ -1,9 +1,10 @@
 "use client"; // This component will render on the client side, required when using React hooks
 
-import { TournamentField } from "@/utils/types";
+import { CreateTournamentDTO, TournamentField } from "@/utils/types";
 import { Button, Dialog, Flex } from "@radix-ui/themes";
 import { useState } from "react";
 import SelectFieldNamingConvention from "./SelectFieldNamingConvention";
+import { createTournament } from "@/utils/API";
 
 /**
  * A component which contains the form to create a tournament
@@ -27,8 +28,22 @@ export default function CreateTournamentForm() {
 
   // Function to handle the form submission
   function handleSubmit(fieldNames: string[]) {
-    console.log(inputFields);
-    console.log(fieldNames);
+    const [year, month, day] = inputFields.start_date.split("-").map(Number);
+    const [hour, minute] = inputFields.start_time.split(":").map(Number);
+
+    const startDate = new Date(
+      Date.UTC(year, month - 1, day, hour, minute)
+    ).toISOString();
+
+    const tournament: CreateTournamentDTO = {
+      name: inputFields.name,
+      start_date: startDate,
+      location: inputFields.location,
+      field_names: fieldNames,
+      match_interval: inputFields.time_between_matches,
+    };
+
+    createTournament(tournament);
   }
 
   // Common styles for the labels

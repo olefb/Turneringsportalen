@@ -8,15 +8,16 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/tournaments")
+@CrossOrigin(origins = ["http://localhost:3000"], maxAge = 3600) // Restrict to frontend
 class TournamentController(private val service: TournamentService) {
 
-    @GetMapping("/")
+    @GetMapping
     fun findAllTournaments() = runBlocking { service.findAllTournaments() }
 
     @GetMapping("/{id}")
-    fun findTournamentById(@RequestParam id: Int) = runBlocking { service.findById(id) }
+    fun findTournamentById(@PathVariable id: Int) = runBlocking { service.findById(id) }
 
-    @PostMapping("/")
+    @PostMapping
     fun addNewTournament(@RequestBody tournamentDTO: CreateTournamentDTO) = runBlocking {
         val tournament = Tournament(
             name = tournamentDTO.name,
@@ -28,9 +29,9 @@ class TournamentController(private val service: TournamentService) {
     }
 
     @PutMapping("/{id}")
-    fun updateTournament(@RequestParam id: Int, @RequestBody tournament: Tournament) = runBlocking {
+    fun updateTournament(@PathVariable id: Int, @RequestBody tournament: Tournament) = runBlocking {
         service.update(
-            id, // Ensure the `update` function matches the expected types
+            id,
             tournament.name,
             tournament.startDate,
             tournament.location,
@@ -39,5 +40,5 @@ class TournamentController(private val service: TournamentService) {
     }
 
     @DeleteMapping("/{id}")
-    fun deleteTournament(@RequestParam id: Int) = runBlocking { service.deleteTournament(id) }
+    fun deleteTournament(@PathVariable id: Int) = runBlocking { service.deleteTournament(id) }
 }
