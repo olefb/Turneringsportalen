@@ -1,7 +1,9 @@
 "use client"; // This component will render on the client side, required when using React hooks
 
-import { Button, Flex } from "@radix-ui/themes";
+import { TournamentField } from "@/utils/types";
+import { Button, Dialog, Flex } from "@radix-ui/themes";
 import { useState } from "react";
+import SelectFieldNamingConvention from "./SelectFieldNamingConvention";
 
 /**
  * A component which contains the form to create a tournament
@@ -24,9 +26,9 @@ export default function CreateTournamentForm() {
   }
 
   // Function to handle the form submission
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault(); // Prevent the default form submission, which would cause a page reload
+  function handleSubmit(fieldNames: string[]) {
     console.log(inputFields);
+    console.log(fieldNames);
   }
 
   // Common styles for the labels
@@ -46,10 +48,9 @@ export default function CreateTournamentForm() {
 
   return (
     <form
-      onSubmit={handleSubmit}
       style={{
-        width: "100%",
-        maxWidth: "400px",
+        width: "600px",
+        maxWidth: "100%",
         padding: "24px",
         border: "1px solid var(--border-color)",
         borderRadius: "28px",
@@ -73,32 +74,44 @@ export default function CreateTournamentForm() {
             />
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-            <label style={labelStyle} htmlFor="start_date">
-              Start Date
-            </label>
-            <input
-              id="start_date"
-              name="start_date"
-              type="date"
-              value={inputFields.start_date}
-              onChange={handleChange}
-              style={inputStyle}
-            />
-          </div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "16px",
+            }}
+          >
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "4px" }}
+            >
+              <label style={labelStyle} htmlFor="start_date">
+                Start Date
+              </label>
+              <input
+                id="start_date"
+                name="start_date"
+                type="date"
+                value={inputFields.start_date}
+                onChange={handleChange}
+                style={inputStyle}
+              />
+            </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-            <label style={labelStyle} htmlFor="start_time">
-              Start Time
-            </label>
-            <input
-              id="start_time"
-              name="start_time"
-              type="time"
-              value={inputFields.start_time}
-              onChange={handleChange}
-              style={inputStyle}
-            />
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "4px" }}
+            >
+              <label style={labelStyle} htmlFor="start_time">
+                Start Time
+              </label>
+              <input
+                id="start_time"
+                name="start_time"
+                type="time"
+                value={inputFields.start_time}
+                onChange={handleChange}
+                style={inputStyle}
+              />
+            </div>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
@@ -115,50 +128,51 @@ export default function CreateTournamentForm() {
             />
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-            <label style={labelStyle} htmlFor="playing_fields">
-              Number of Playing Fields
-            </label>
-            <input
-              id="playing_fields"
-              name="playing_fields"
-              type="number"
-              value={inputFields.playing_fields}
-              onChange={handleChange}
-              style={inputStyle}
-              placeholder="Enter the number of playing fields"
-            />
-          </div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "16px",
+            }}
+          >
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "4px" }}
+            >
+              <label style={labelStyle} htmlFor="playing_fields">
+                Number of Playing Fields
+              </label>
+              <input
+                id="playing_fields"
+                name="playing_fields"
+                type="number"
+                value={inputFields.playing_fields}
+                onChange={handleChange}
+                style={inputStyle}
+                placeholder="Enter the number of playing fields"
+              />
+            </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-            <label style={labelStyle} htmlFor="time_between_matches">
-              Time Between Matches (minutes)
-            </label>
-            <input
-              id="time_between_matches"
-              name="time_between_matches"
-              type="number"
-              value={inputFields.time_between_matches}
-              onChange={handleChange}
-              style={inputStyle}
-            />
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "4px" }}
+            >
+              <label style={labelStyle} htmlFor="time_between_matches">
+                Time Between Matches (minutes)
+              </label>
+              <input
+                id="time_between_matches"
+                name="time_between_matches"
+                type="number"
+                value={inputFields.time_between_matches}
+                onChange={handleChange}
+                style={inputStyle}
+              />
+            </div>
           </div>
         </div>
-
-        <Button
-          style={{
-            width: "fit-content",
-            backgroundColor: "var(--submit-button-color)",
-            color: "var(--text-color)",
-            border: "1px solid var(--border-color)",
-            padding: "16px",
-            borderRadius: "16px",
-            fontSize: "16px",
-          }}
-          type="submit"
-        >
-          Create Tournament
-        </Button>
+        <SelectFieldNamingConvention
+          onSubmit={handleSubmit}
+          fieldCount={inputFields.playing_fields}
+        />
       </Flex>
     </form>
   );
