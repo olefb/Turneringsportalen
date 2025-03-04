@@ -24,7 +24,7 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 
-	implementation(platform("io.github.jan-tennert.supabase:bom:3.1.1"))
+	implementation(platform("io.github.jan-tennert.supabase:bom:3.1.2"))
 	implementation("io.github.jan-tennert.supabase:postgrest-kt")
 
 	implementation("io.ktor:ktor-client-cio:3.1.1")
@@ -35,7 +35,7 @@ dependencies {
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
 	// Allows for easier api testing
-	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5")
 }
 
 kotlin {
