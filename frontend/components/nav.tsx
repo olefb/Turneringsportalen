@@ -20,9 +20,6 @@ export default function Nav() {
             <TabNav.Link active={pathname === '/tournaments'} href="/tournaments">
               Tournaments
             </TabNav.Link>
-            <TabNav.Link active={pathname === '/test'} href="/test">
-              Test
-            </TabNav.Link>
             <TabNav.Link active={pathname === '/tournaments/1/registration'} href="/tournaments/1/registration">
               Register for tournament (temp)
             </TabNav.Link>
