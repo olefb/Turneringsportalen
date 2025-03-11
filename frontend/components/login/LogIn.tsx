@@ -9,7 +9,7 @@ export default function LoginDialog() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add authentication logic here
+    // TODO: Add authentication logic here
     console.log("Login attempt with:", email, password);
   };
 
@@ -18,13 +18,11 @@ export default function LoginDialog() {
       <Dialog.Trigger>
         <Button variant="outline" size="3">Log in</Button>
       </Dialog.Trigger>
-
       <Dialog.Content style={{ maxWidth: "450px" }}>
         <Dialog.Title>Log in to Turneringsportalen</Dialog.Title>
         <Dialog.Description size="2" mb="4">
           Enter your credentials to access your account.
         </Dialog.Description>
-
         <form onSubmit={handleSubmit}>
           <Flex direction="column" gap="3">
             <label>
@@ -49,7 +47,6 @@ export default function LoginDialog() {
               />
             </label>
           </Flex>
-
           <Flex gap="3" mt="4" justify="end">
             <Dialog.Close>
               <Button variant="soft" color="gray">
