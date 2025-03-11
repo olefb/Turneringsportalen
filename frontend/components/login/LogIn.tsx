@@ -4,13 +4,19 @@ import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
 import { useState } from "react";
 
 export default function LoginDialog() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [inputFields, setInputFields] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputFields({ ...inputFields, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // TODO: Add authentication logic here
-    console.log("Login attempt with:", email, password);
+    console.log("Login attempt with:", inputFields.email, inputFields.password);
   };
 
   return (
@@ -30,9 +36,11 @@ export default function LoginDialog() {
                 Email
               </Text>
               <TextField.Root
+                id="email"
+                name = "email"
+                value={inputFields.email}
+                onChange={handleChange}
                 placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
               />
             </label>
             <label>
@@ -40,10 +48,11 @@ export default function LoginDialog() {
                 Password
               </Text>
               <TextField.Root
-                type="password"
+                id="password"
+                name="password"
+                value={inputFields.password}
+                onChange={handleChange}
                 placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
               />
             </label>
           </Flex>
