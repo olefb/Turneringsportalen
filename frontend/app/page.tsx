@@ -12,6 +12,7 @@ import {
 } from "@radix-ui/themes";
 import { ArrowDownIcon } from "@radix-ui/react-icons";
 import LoginDialog from "@/components/login/LogIn";
+import SignupDialog from "@/components/signUp/SignUp";
 
 export default function Page() {
   return (
@@ -58,7 +59,7 @@ export default function Page() {
 
               <Flex direction="column" gap="3">
                 <p>A tournament organizer? Create your account now.</p>
-                <Button size="3">Sign up</Button>
+                <SignupDialog /> 
 
                 <p>Already a user?</p>
                 <LoginDialog /> 
