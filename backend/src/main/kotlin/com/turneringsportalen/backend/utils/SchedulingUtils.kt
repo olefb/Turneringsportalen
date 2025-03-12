@@ -78,7 +78,7 @@ fun scheduleExceptionGroups(group: List<Participant>, minimumMatches: Int, group
 
             // Ensure participant J and I has less than 3 matches before continuing
             if ((matchCount[participantJ.participantId]
-                    ?: 0) != 3 && (matchCount[participantI.participantId] ?: 0) != 3
+                    ?: 0) != minimumMatches && (matchCount[participantI.participantId] ?: 0) != minimumMatches
             ) {
                 val match = MatchWithParticipantsDTO(
                     matchId = matchid,
