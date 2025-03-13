@@ -465,6 +465,116 @@ class SchedulingUtilsTest {
     }
 
     @Test
+    fun testScheduleExceptionGroupWith4MinimumMatchesAnd6GroupSize() {
+        // Select 4 participants
+        val group = potentialParticipants.take(6)
+        val minimumMatches = 4
+
+        val matches = scheduleExceptionGroups(group, minimumMatches, group.size, tournament, potentialFields)
+
+        // Count matches per participant
+        val matchCounts = mutableMapOf<Int, Int>() // Maps participant ID to the number of matches played
+        for (match in matches) {
+            for (participant in match.participants) {
+                matchCounts[participant.participant.participantId ?: 0] =
+                    matchCounts.getOrDefault(participant.participant.participantId, 0) + 1
+            }
+        }
+
+        // Assert that each participant has played exactly 3 matches
+        for (participant in group) {
+            val count = matchCounts[participant.participantId] ?: 0
+            assertEquals(4, count, "Participant ${participant.participantId} should have exactly 4 matches")
+        }
+
+        val playedMatches = mutableSetOf<Pair<Int, Int>>() // Stores unique matchups
+
+        for (match in matches) {
+            val participantIds = match.participants.map { it.participant.participantId ?: 0 }
+
+            // Ensure each match has exactly two participants
+            assertEquals(2, participantIds.size, "Each match should have exactly two participants")
+
+            val (id1, id2) = participantIds.sorted() // Normalize order
+            val matchPair = id1 to id2
+
+            // Check if the match pair already exists
+            assertFalse(playedMatches.contains(matchPair), "Duplicate match found between $id1 and $id2")
+
+            // Add match pair to the set
+            playedMatches.add(matchPair)
+
+            // Update match counts
+            for (participant in match.participants) {
+                matchCounts[participant.participant.participantId ?: 0] =
+                    matchCounts.getOrDefault(participant.participant.participantId, 0) + 1
+            }
+        }
+
+        // Ensure playedMatches is same size as matches
+        assertEquals(playedMatches.size, matches.size, "Set of pairings is same size as original match list")
+    }
+
+    @Test
+    fun testScheduleExceptionGroupWith4MinimumMatchesAnd7GroupSize() {
+        // Select 4 participants
+        val group = potentialParticipants.take(7)
+        val minimumMatches = 4
+
+        val matches = scheduleExceptionGroups(group, minimumMatches, group.size, tournament, potentialFields)
+
+        // Count matches per participant
+        val matchCounts = mutableMapOf<Int, Int>() // Maps participant ID to the number of matches played
+        for (match in matches) {
+            for (participant in match.participants) {
+                matchCounts[participant.participant.participantId ?: 0] =
+                    matchCounts.getOrDefault(participant.participant.participantId, 0) + 1
+            }
+        }
+
+        // Ensure one participant has exactly 5 matches while the rest have 4
+        var foundFourMatches = false
+
+        for (participant in group) {
+            val count = matchCounts[participant.participantId] ?: 0
+
+            if (count == 5) {
+                assertFalse(foundFourMatches, "More than one participant has 5 matches!")
+                foundFourMatches = true
+            } else {
+                assertEquals(4, count, "Participant ${participant.participantId} should have exactly 4 matches")
+            }
+        }
+
+        val playedMatches = mutableSetOf<Pair<Int, Int>>() // Stores unique matchups
+
+        for (match in matches) {
+            val participantIds = match.participants.map { it.participant.participantId ?: 0 }
+
+            // Ensure each match has exactly two participants
+            assertEquals(2, participantIds.size, "Each match should have exactly two participants")
+
+            val (id1, id2) = participantIds.sorted() // Normalize order
+            val matchPair = id1 to id2
+
+            // Check if the match pair already exists
+            assertFalse(playedMatches.contains(matchPair), "Duplicate match found between $id1 and $id2")
+
+            // Add match pair to the set
+            playedMatches.add(matchPair)
+
+            // Update match counts
+            for (participant in match.participants) {
+                matchCounts[participant.participant.participantId ?: 0] =
+                    matchCounts.getOrDefault(participant.participant.participantId, 0) + 1
+            }
+        }
+
+        // Ensure playedMatches is same size as matches
+        assertEquals(playedMatches.size, matches.size, "Set of pairings is same size as original match list")
+    }
+
+    @Test
     fun testScheduleExceptionGroupWith4MinimumMatchesAnd8GroupSize() {
         // Select 4 participants
         val group = potentialParticipants.take(8)
@@ -481,7 +591,7 @@ class SchedulingUtilsTest {
             }
         }
 
-        // Assert that each participant has played exactly 3 matches
+        // Assert that each participant has played exactly 4 matches
         for (participant in group) {
             val count = matchCounts[participant.participantId] ?: 0
             assertEquals(4, count, "Participant ${participant.participantId} should have exactly 4 matches")
@@ -532,7 +642,7 @@ class SchedulingUtilsTest {
             }
         }
 
-        // Assert that each participant has played exactly 3 matches
+        // Assert that each participant has played exactly 6 matches
         for (participant in group) {
             val count = matchCounts[participant.participantId] ?: 0
             assertEquals(6, count, "Participant ${participant.participantId} should have exactly 6 matches")
@@ -583,10 +693,18 @@ class SchedulingUtilsTest {
             }
         }
 
-        // Assert that each participant has played exactly 3 matches
+        // Ensure one participant has exactly 7 matches while the rest have 6
+        var foundFourMatches = false
+
         for (participant in group) {
             val count = matchCounts[participant.participantId] ?: 0
-            assertEquals(6, count, "Participant ${participant.participantId} should have exactly 6 matches")
+
+            if (count == 7) {
+                assertFalse(foundFourMatches, "More than one participant has 7 matches!")
+                foundFourMatches = true
+            } else {
+                assertEquals(6, count, "Participant ${participant.participantId} should have exactly 6 matches")
+            }
         }
 
         val playedMatches = mutableSetOf<Pair<Int, Int>>() // Stores unique matchups
@@ -634,7 +752,7 @@ class SchedulingUtilsTest {
             }
         }
 
-        // Assert that each participant has played exactly 3 matches
+        // Assert that each participant has played exactly 6 matches
         for (participant in group) {
             val count = matchCounts[participant.participantId] ?: 0
             assertEquals(6, count, "Participant ${participant.participantId} should have exactly 6 matches")
@@ -685,10 +803,18 @@ class SchedulingUtilsTest {
             }
         }
 
-        // Assert that each participant has played exactly 3 matches
+        // Ensure one participant has exactly 7 matches while the rest have 6
+        var foundFourMatches = false
+
         for (participant in group) {
             val count = matchCounts[participant.participantId] ?: 0
-            assertEquals(6, count, "Participant ${participant.participantId} should have exactly 6 matches")
+
+            if (count == 7) {
+                assertFalse(foundFourMatches, "More than one participant has 7 matches!")
+                foundFourMatches = true
+            } else {
+                assertEquals(6, count, "Participant ${participant.participantId} should have exactly 6 matches")
+            }
         }
 
         val playedMatches = mutableSetOf<Pair<Int, Int>>() // Stores unique matchups
@@ -736,7 +862,7 @@ class SchedulingUtilsTest {
             }
         }
 
-        // Assert that each participant has played exactly 3 matches
+        // Assert that each participant has played exactly 6 matches
         for (participant in group) {
             val count = matchCounts[participant.participantId] ?: 0
             assertEquals(6, count, "Participant ${participant.participantId} should have exactly 6 matches")
@@ -787,10 +913,18 @@ class SchedulingUtilsTest {
             }
         }
 
-        // Assert that each participant has played exactly 3 matches
+        // Ensure one participant has exactly 7 matches while the rest have 6
+        var foundFourMatches = false
+
         for (participant in group) {
             val count = matchCounts[participant.participantId] ?: 0
-            assertEquals(6, count, "Participant ${participant.participantId} should have exactly 6 matches")
+
+            if (count == 7) {
+                assertFalse(foundFourMatches, "More than one participant has 7 matches!")
+                foundFourMatches = true
+            } else {
+                assertEquals(6, count, "Participant ${participant.participantId} should have exactly 6 matches")
+            }
         }
 
         val playedMatches = mutableSetOf<Pair<Int, Int>>() // Stores unique matchups
