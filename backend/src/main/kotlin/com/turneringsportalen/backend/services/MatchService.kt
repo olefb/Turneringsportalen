@@ -4,7 +4,9 @@ import com.turneringsportalen.backend.entities.Match
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.from
 import kotlinx.datetime.Instant
+import org.springframework.stereotype.Service
 
+@Service
 class MatchService(private val client: SupabaseClient) {
 
     suspend fun findAllMatches(): List<Match> {
@@ -29,7 +31,6 @@ class MatchService(private val client: SupabaseClient) {
                 eq("match_id",id)
             }
         }
-
     }
 
     suspend fun update(matchId: Int, tournamentId: Int, time: Instant, gameLocationId: Int){

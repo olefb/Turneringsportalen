@@ -14,7 +14,7 @@ class MatchController(private val service: MatchService){
     @GetMapping()
     fun findAllMatches() = runBlocking { service.findAllMatches() }
 
-    @GetMapping("/{matchid")
+    @GetMapping("/{id}")
     fun findMatchById(@PathVariable id: Int) = runBlocking { service.findById(id) }
 
     @PostMapping

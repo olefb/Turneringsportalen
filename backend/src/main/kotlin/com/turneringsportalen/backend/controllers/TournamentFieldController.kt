@@ -2,45 +2,37 @@ package com.turneringsportalen.backend.controllers
 
 import com.turneringsportalen.backend.daos.CreateTournamentDTO
 import com.turneringsportalen.backend.entities.Tournament
+import com.turneringsportalen.backend.entities.TournamentField
+import com.turneringsportalen.backend.services.TournamentFieldService
 import com.turneringsportalen.backend.services.TournamentService
+import io.github.jan.supabase.SupabaseClient
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.serializer
 import org.springframework.web.bind.annotation.*
 
-class TournamentFieldController {
-    @RestController
-    @RequestMapping("/tournaments")
-    @CrossOrigin(origins = ["http://localhost:3000"], maxAge = 3600) // Restrict to frontend
-    class TournamentController(private val service: TournamentService) {
 
-        @GetMapping
-        fun findAllTournaments() = runBlocking { service.findAllTournaments() }
+@RestController
+@RequestMapping("/available_fields")
+@CrossOrigin(origins = ["http://localhost:3000"], maxAge = 3600) // Restrict to frontend
+class TournamentFieldController(private val service: TournamentFieldService) {
 
-        @GetMapping("/{id}")
-        fun findTournamentById(@PathVariable id: Int) = runBlocking { service.findById(id) }
 
-        @PostMapping
-        fun addNewTournament(@RequestBody tournamentDTO: CreateTournamentDTO) = runBlocking {
-            val tournament = Tournament(
-                name = tournamentDTO.name,
-                startDate = tournamentDTO.startDate,
-                location = tournamentDTO.location,
-                matchInterval = tournamentDTO.matchInterval
-            )
-            service.createTournament(tournament)
-        }
+    @GetMapping
+    fun findAllTournamentFields() = runBlocking { service.findAllTournamentFields() }
 
-        @PutMapping("/{id}")
-        fun updateTournament(@PathVariable id: Int, @RequestBody tournament: Tournament) = runBlocking {
-            service.update(
-                id,
-                tournament.name,
-                tournament.startDate,
-                tournament.location,
-                tournament.matchInterval
-            )
-        }
+    @GetMapping("/{id}")
+    fun findTournamentFieldById(@PathVariable id: Int) = runBlocking { service.findTournamentFieldById(id) }
 
-        @DeleteMapping("/{id}")
-        fun deleteTournament(@PathVariable id: Int) = runBlocking { service.deleteTournament(id) }
+    @PostMapping
+    fun addTournamentField(@RequestBody tournamentField: TournamentField) = runBlocking {
+        service.addTournamentField(tournamentField)
     }
+
+    @PutMapping("/{id}")
+    fun updateTournamentField(@PathVariable id: Int, @RequestBody tournamentField: TournamentField) = runBlocking {
+        service.updateTournamentField(tournamentField)
+    }
+
+    @DeleteMapping("/{id}")
+    fun deleteTournamentField(@PathVariable id: Int) = runBlocking { service.deleteTournamentField(id) }
 }

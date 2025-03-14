@@ -14,8 +14,8 @@ class ParticipantController(private val service: ParticipantService) {
     @GetMapping()
     fun findAllParticipants() = runBlocking { service.findAllParticipants() }
 
-    @GetMapping("/{participantid}")
-    fun findParticipantById(@PathVariable id: Int) = runBlocking { service.findById(id) }
+    @GetMapping("/{id}")
+    fun findParticipantById(@PathVariable id: Int) = runBlocking { service.findMatchParticipantById(id) }
 
     @PostMapping
     fun addNewParticipant(@RequestBody participantDTO : ParticipantDTO) = runBlocking {
@@ -24,10 +24,8 @@ class ParticipantController(private val service: ParticipantService) {
             tournamentId = participantDTO.tournamentId,
             name = participantDTO.name
         )
-        service.addNewParticipant(participant)
+        service.addMatchParticipant(participant)
     }
-    @DeleteMapping("/{id}")
-    fun deleteParticipant(@PathVariable id: Int) = runBlocking { service.deleteMatchParticipant(id) }
 
 
 
