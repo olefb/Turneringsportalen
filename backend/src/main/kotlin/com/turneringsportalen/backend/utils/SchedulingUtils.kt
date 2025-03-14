@@ -59,7 +59,6 @@ fun scheduleStandardGroups(group: List<Participant>, minimumMatches: Int, tourna
 
 // Exception when group has more members than normal group size
 fun scheduleExceptionGroups(group: List<Participant>, minimumMatches: Int, groupSize: Int, tournament: Tournament, fields: List<TournamentField>) : List<MatchWithParticipantsDTO> {
-    var matchid = 0;
     var matches = mutableListOf<MatchWithParticipantsDTO>()
 
     // Track min matches
@@ -67,10 +66,7 @@ fun scheduleExceptionGroups(group: List<Participant>, minimumMatches: Int, group
     // sets each participant on each participantId in the group to 0
     group.forEach { matchCount[it.participantId ?: Int.MAX_VALUE] = 0 }
 
-    val matchSplitter = Math.ceil(group.size.toDouble() / 2).toInt()
-    val isEven = group.size % 2 == 0;
-
-    if(isEven && (minimumMatches * 2) == groupSize) {
+    if((minimumMatches * 2) == groupSize) {
         // case when there is an even number of participants, and the group can be split in half
         println("2x")
         matches = schedule2TimesMinimumMatches(group, minimumMatches, tournament, fields)

@@ -52,23 +52,16 @@ class TournamentService(private val client: SupabaseClient) {
             TournamentField(4, tournamentId, "Field D")
         )
 
-        var matches: List<MatchWithParticipantsDTO> = listOf()
+        val matches: MutableList<MatchWithParticipantsDTO> = mutableListOf();
         val groupSize = minimumMatches + 1
         val groups = createGroups(participants, minimumMatches)
 
         for (group in groups) {
-            for (participant in group) {
-                println(participant.name)
-            }
-            println()
-        }
-
-        for (group in groups) {
             if (group.size == groupSize) {
                 // Standard group pairing (all-vs-all)
-                matches = scheduleStandardGroups(group, minimumMatches, tournament, fields)
+                matches += scheduleStandardGroups(group, minimumMatches, tournament, fields)
             } else {
-                matches = scheduleExceptionGroups(group, minimumMatches, group.size, tournament, fields)
+                matches += scheduleExceptionGroups(group, minimumMatches, group.size, tournament, fields)
             }
         }
 

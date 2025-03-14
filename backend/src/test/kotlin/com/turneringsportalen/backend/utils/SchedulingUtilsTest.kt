@@ -145,7 +145,6 @@ class SchedulingUtilsTest {
 
     @Test
     fun testScheduleStandardGroupWith3MinimumMatches() {
-        // Select 4 participants
         val group = potentialParticipants.take(4)
         val minimumMatches = 3
 
@@ -196,7 +195,6 @@ class SchedulingUtilsTest {
 
     @Test
     fun testScheduleStandardGroupWith4MinimumMatches() {
-        // Select 4 participants
         val group = potentialParticipants.take(5)
         val minimumMatches = 4
 
@@ -247,7 +245,6 @@ class SchedulingUtilsTest {
 
     @Test
     fun testScheduleStandardGroupWith7MinimumMatches() {
-        // Select 4 participants
         val group = potentialParticipants.take(8)
         val minimumMatches = 7
 
@@ -298,7 +295,6 @@ class SchedulingUtilsTest {
 
     @Test
     fun testScheduleExceptionGroupWith3MinimumMatchesAnd5GroupSize() {
-        // Select 4 participants
         val group = potentialParticipants.take(5)
         val minimumMatches = 3
 
@@ -360,7 +356,6 @@ class SchedulingUtilsTest {
 
     @Test
     fun testScheduleExceptionGroupWith3MinimumMatchesAnd6GroupSize() {
-        // Select 4 participants
         val group = potentialParticipants.take(6)
         val minimumMatches = 3
 
@@ -522,7 +517,6 @@ class SchedulingUtilsTest {
 
     @Test
     fun testScheduleExceptionGroupWith4MinimumMatchesAnd7GroupSize() {
-        // Select 4 participants
         val group = potentialParticipants.take(7)
         val minimumMatches = 4
 
@@ -573,7 +567,6 @@ class SchedulingUtilsTest {
 
     @Test
     fun testScheduleExceptionGroupWith4MinimumMatchesAnd8GroupSize() {
-        // Select 4 participants
         val group = potentialParticipants.take(8)
         val minimumMatches = 4
 
@@ -624,7 +617,6 @@ class SchedulingUtilsTest {
 
     @Test
     fun testScheduleExceptionGroupWith6MinimumMatchesAnd8GroupSize() {
-        // Select 4 participants
         val group = potentialParticipants.take(8)
         val minimumMatches = 6
 
@@ -675,7 +667,6 @@ class SchedulingUtilsTest {
 
     @Test
     fun testScheduleExceptionGroupWith6MinimumMatchesAnd9GroupSize() {
-        // Select 4 participants
         val group = potentialParticipants.take(9)
         val minimumMatches = 6
 
@@ -726,7 +717,6 @@ class SchedulingUtilsTest {
 
     @Test
     fun testScheduleExceptionGroupWith6MinimumMatchesAnd10GroupSize() {
-        // Select 4 participants
         val group = potentialParticipants.take(10)
         val minimumMatches = 6
 
@@ -777,7 +767,6 @@ class SchedulingUtilsTest {
 
     @Test
     fun testScheduleExceptionGroupWith6MinimumMatchesAnd11GroupSize() {
-        // Select 4 participants
         val group = potentialParticipants.take(11)
         val minimumMatches = 6
 
@@ -828,7 +817,6 @@ class SchedulingUtilsTest {
 
     @Test
     fun testScheduleExceptionGroupWith6MinimumMatchesAnd12GroupSize() {
-        // Select 4 participants
         val group = potentialParticipants.take(12)
         val minimumMatches = 6
 
@@ -879,7 +867,6 @@ class SchedulingUtilsTest {
 
     @Test
     fun testScheduleExceptionGroupWith6MinimumMatchesAnd13GroupSize() {
-        // Select 4 participants
         val group = potentialParticipants.take(13)
         val minimumMatches = 6
 
@@ -930,7 +917,6 @@ class SchedulingUtilsTest {
 
     @Test
     fun testScheduleExceptionGroupWith9MinimumMatchesAnd13GroupSize() {
-        // Select 4 participants
         val group = potentialParticipants.take(13)
         val minimumMatches = 9
 
@@ -992,7 +978,6 @@ class SchedulingUtilsTest {
 
     @Test
     fun testScheduleExceptionGroupWith13MinimumMatchesAnd15GroupSize() {
-        // Select 4 participants
         val group = potentialParticipants.take(15)
         val minimumMatches = 13
 
