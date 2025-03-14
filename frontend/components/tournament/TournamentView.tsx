@@ -13,16 +13,16 @@ export default async function TournamentView({ id }: Props) {
 
     /// TEMPORARY DATA (ENDPOINTS NOT IMPLEMENTED YET)
     let participants: Participant[] = [{
-        participant_id: 1, name: "John Doe",
+        participant_id: 1, name: "Brann FK",
         tournament_id: 0
     }, {
-        participant_id: 2, name: "Jane Doe",
+        participant_id: 2, name: "Laksevåg FK",
         tournament_id: 0
     }, {
-        participant_id: 3, name: "John Smith",
+        participant_id: 3, name: "Åsane FK",
         tournament_id: 0
     }, {
-        participant_id: 4, name: "Jane Smith",
+        participant_id: 4, name: "Fyllingsdalen FK",
         tournament_id: 0
     }];
 
