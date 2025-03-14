@@ -36,7 +36,8 @@ export default function LoginDialog() {
                 Email
               </Text>
               <TextField.Root
-                id="email"
+                type="email"
+                id="user_email"
                 name = "email"
                 value={inputFields.email}
                 onChange={handleChange}
@@ -48,7 +49,8 @@ export default function LoginDialog() {
                 Password
               </Text>
               <TextField.Root
-                id="password"
+                type="password"
+                id="user_password"
                 name="password"
                 value={inputFields.password}
                 onChange={handleChange}
