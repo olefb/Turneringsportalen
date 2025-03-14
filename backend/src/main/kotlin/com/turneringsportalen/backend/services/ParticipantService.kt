@@ -34,8 +34,19 @@ class ParticipantService(private val client: SupabaseClient) {
         }
     }
 
-    fun updateMatchParticipants(){
-
+    suspend fun updateParticipants(participant: Participant){
+        client.from("participant").update(
+            {
+                set("participant_id", participant.participantId )
+                set("tournament_id", participant.tournamentId)
+                set("name", participant.name)
+                
+            }
+        ){
+            filter {
+                eq("participant_id", participant.participantId?: 0)
+            }
+        }
     }
 }
 

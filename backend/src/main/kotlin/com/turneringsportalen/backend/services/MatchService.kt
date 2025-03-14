@@ -26,6 +26,11 @@ class MatchService(private val client: SupabaseClient) {
     }
 
     suspend fun deleteMatch(id: Int){
+        client.from("match_participant").delete({
+            filter{
+                eq("match_id", id)
+            }
+        })
         client.from("match").delete{
             filter {
                 eq("match_id",id)

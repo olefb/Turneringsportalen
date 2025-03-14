@@ -27,7 +27,10 @@ class ParticipantController(private val service: ParticipantService) {
         service.addMatchParticipant(participant)
     }
 
-
+    @PutMapping("/{id}")
+    fun updateParticipant(@PathVariable id : Int, @RequestBody participant: Participant)= runBlocking{
+        service.updateParticipants(participant)
+    }
 
 
 
