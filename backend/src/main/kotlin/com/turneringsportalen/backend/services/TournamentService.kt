@@ -11,7 +11,7 @@ class TournamentService(private val client: SupabaseClient) {
 
     // Function for the overarching algorithm of the app, automatically setting up a match schedule given a tournament, participants and playing fields exist.
     // Gives back a list of matches so that the webpage can display them and so that changes might be made
-    suspend fun setUpMatches(tournamentId: Int) /*: List<Match>*/ {
+    suspend fun createSchedule(tournamentId: Int) /*: List<Match>*/ {
         // Todo: Set up this damn thing
     }
 
