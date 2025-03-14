@@ -89,8 +89,7 @@ class TournamentService(private val client: SupabaseClient) {
         client.from("match").insert(match)
 
         for ((index, participant) in participants.withIndex()) {
-            client.from("match_participant")
-                .insert(MatchParticipant(match.matchId, participant.participantId ?: 0, index))
+            client.from("match_participant").insert(MatchParticipant(match.matchId, participant.participantId ?: 0, index))
         }
     }
 
