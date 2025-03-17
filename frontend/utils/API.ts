@@ -2,7 +2,7 @@
  * This file contains the functions to communicate with the server
  */
 
-import { CreateTournamentDTO } from "./types";
+import { CreateTournamentDTO, Match, MatchParticipant } from "./types";
 
 const API_URL = "http://localhost:8080";
 
