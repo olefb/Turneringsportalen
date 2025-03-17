@@ -11,11 +11,12 @@ import {
   Separator,
 } from "@radix-ui/themes";
 import { ArrowDownIcon } from "@radix-ui/react-icons";
+import LoginDialog from "@/components/login/LogIn";
 
 export default function Page() {
   return (
     <>
-      <Container size="4" style={{ minHeight: "100vh" }}>
+      <Container size="4" style={{ minHeight: "100vh", paddingRight: "calc(var(--scrollbar-width, 15px))", overflow: "hidden" }}>
         <Flex
           direction="column"
           style={{
@@ -58,10 +59,10 @@ export default function Page() {
               <Flex direction="column" gap="3">
                 <p>A tournament organizer? Create your account now.</p>
                 <Button size="3">Sign up</Button>
+
                 <p>Already a user?</p>
-                <Button variant="outline" size="3">
-                  Log in
-                </Button>
+                <LoginDialog /> 
+
                 <p>Just want to set up a quick tournament?</p>
                 <Button variant="outline" size="2">
                   Click here
