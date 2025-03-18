@@ -43,7 +43,7 @@ class TournamentFieldService(private val client: SupabaseClient) {
             }
         ) {
             filter {
-                eq("field_id", tournamentField.fieldId)
+                eq("field_id", tournamentField.fieldId ?: 0)
             }
         }
     }
