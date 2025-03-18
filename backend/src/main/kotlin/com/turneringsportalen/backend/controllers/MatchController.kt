@@ -21,7 +21,7 @@ class MatchController(private val service: MatchService){
     fun addNewMatch(@RequestBody matchDTO: MatchDTO) = runBlocking {
         val match = Match(
             matchId = matchDTO.matchId,
-            tournamentID = matchDTO.tournamentId,
+            tournamentId = matchDTO.tournamentId,
             time = matchDTO.time,
             gameLocationId = matchDTO.gameLocationId
         )
@@ -33,7 +33,7 @@ class MatchController(private val service: MatchService){
     fun updateMatch(@PathVariable id: Int, @RequestBody match: Match) = runBlocking{
         service.update(
             id,
-            match.tournamentID,
+            match.tournamentId,
             match.time,
             match.gameLocationId
         )

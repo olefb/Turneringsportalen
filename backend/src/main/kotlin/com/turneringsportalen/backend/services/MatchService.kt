@@ -26,6 +26,11 @@ class MatchService(private val client: SupabaseClient) {
     }
 
     suspend fun deleteMatch(id: Int){
+        client.from("match_participant").delete({
+            filter{
+                eq("match_id", id)
+            }
+        })
         client.from("match").delete{
             filter {
                 eq("match_id",id)
@@ -34,16 +39,16 @@ class MatchService(private val client: SupabaseClient) {
     }
 
     suspend fun update(matchId: Int, tournamentId: Int, time: Instant, gameLocationId: Int){
-        client.from("matches").update(
+        client.from("match").update(
             {
                 set("match_id", matchId)
-                set("tournamentId", tournamentId)
+                set("tournament_id", tournamentId)
                 set("time", time)
-                set("gameLocationId", gameLocationId)
+                set("game_location_id", gameLocationId)
             }
         ){
             filter {
-                eq("matchId", matchId)
+                eq("match_id", matchId)
             }
         }
     }

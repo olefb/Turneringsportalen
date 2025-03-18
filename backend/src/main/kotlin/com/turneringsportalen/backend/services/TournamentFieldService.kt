@@ -34,15 +34,17 @@ class TournamentFieldService(private val client: SupabaseClient) {
 
 
 
-    suspend fun updateTournamentField(tournamentField: TournamentField){
+    suspend fun updateTournamentField(tournamentField: TournamentField) {
         client.from("available_fields").update(
             {
-
                 set("field_id", tournamentField.fieldId)
                 set("tournament_id", tournamentField.tournamentId)
                 set("field_name", tournamentField.fieldName)
             }
-        )
-
+        ) {
+            filter {
+                eq("field_id", tournamentField.fieldId ?: 0)
+            }
+        }
     }
 }

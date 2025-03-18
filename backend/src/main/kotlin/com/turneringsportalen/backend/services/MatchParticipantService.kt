@@ -43,6 +43,11 @@ class MatchParticipantService(private val client: SupabaseClient) {
             set("participant_id", participantId)
             set("index", index)
         }
-        )
+        ){
+            filter {
+                eq("match_id", matchId)
+                eq("participant_id", participantId)
+            }
+        }
     }
 }
