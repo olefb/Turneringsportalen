@@ -1,4 +1,5 @@
 package com.turneringsportalen.backend.services
+
 import com.turneringsportalen.backend.entities.*
 import org.springframework.stereotype.Service
 import io.github.jan.supabase.SupabaseClient

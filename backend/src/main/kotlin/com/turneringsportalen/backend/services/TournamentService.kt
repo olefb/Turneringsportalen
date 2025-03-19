@@ -17,7 +17,7 @@ class TournamentService(private val client: SupabaseClient) {
     // Function for the overarching algorithm of the app, automatically setting up a match schedule given a tournament, participants and playing fields exist.
     // Gives back a list of matches so that the webpage can display them and so that changes might be made
     suspend fun setUpMatches(tournamentId: Int): List<MatchWithParticipantsDTO> {
-        val tournament: Tournament = Tournament(tournamentId, "Test Tournament", Clock.System.now(), "Test Location", 30)
+        val tournament = Tournament(tournamentId, "Test Tournament", Clock.System.now(), "Test Location", 30)
         val minimumMatches = 3
         val participants = listOf(
             Participant(1, tournamentId, "Trane gul"),
@@ -42,7 +42,7 @@ class TournamentService(private val client: SupabaseClient) {
              Participant(20, 1, "Brann hvit"),
              Participant(21, 1, "Brann rød"),
              Participant(22, 1, "Brann svart"), */
-        );
+        )
 
         val fields = listOf(
             TournamentField(1, tournamentId, "Field A"),
@@ -51,7 +51,7 @@ class TournamentService(private val client: SupabaseClient) {
             TournamentField(4, tournamentId, "Field D")
         )
 
-        val matches: MutableList<MatchWithParticipantsDTO> = mutableListOf();
+        val matches: MutableList<MatchWithParticipantsDTO> = mutableListOf()
         val groupSize = minimumMatches + 1
         val groups = createGroups(participants, minimumMatches)
 
@@ -72,7 +72,7 @@ class TournamentService(private val client: SupabaseClient) {
             }
         }
 
-        return matches;
+        return matches
     }
 
     suspend fun createTournament(tournament: Tournament): Tournament {
@@ -128,12 +128,20 @@ class TournamentService(private val client: SupabaseClient) {
         }.decodeList<TournamentField>()
     }
 
-    suspend fun findParticipantById(id: Int): Match? {
+    suspend fun findParticipantById(id: Int): Participant? {
         return client.from("participant").select {
             filter {
                 eq("participant_id", id)
             }
-        }.decodeSingle<Match>()
+        }.decodeSingle<Participant>()
+    }
+
+    suspend fun findAllTournamentParticipants(id: Int): List<Participant>? {
+        return client.from("participant").select {
+            filter {
+                eq("tournament_id", id)
+            }
+        }.decodeList<Participant>()
     }
 
     suspend fun findMatchParticipantByMatchId(id: Int): List<MatchParticipant>? {
