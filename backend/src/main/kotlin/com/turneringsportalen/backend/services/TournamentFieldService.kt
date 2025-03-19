@@ -20,14 +20,6 @@ class TournamentFieldService(private val client: SupabaseClient) {
         }.decodeSingle()
     }
 
-    suspend fun findFieldsByTournamentId(id: Int): List<TournamentField>? {
-        return client.from("available_fields").select {
-            filter {
-                eq("tournament_id", id)
-            }
-        }.decodeList<TournamentField>()
-    }
-
     suspend fun addTournamentField(tournamentField: TournamentField){
        client.from("available_fields").insert(tournamentField)
     }

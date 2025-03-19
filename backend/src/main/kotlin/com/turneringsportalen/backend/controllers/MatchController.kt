@@ -28,11 +28,6 @@ class MatchController(private val service: MatchService){
         service.createMatch(match)
     }
 
-    @GetMapping("/{tournamentId}")
-    fun findMatchByTournamentId(@PathVariable tournamentId: Int) = runBlocking {
-        service.findMatchesByTournamentId(tournamentId)
-    }
-
     @PutMapping("/{id}")
     fun updateMatch(@PathVariable id: Int, @RequestBody match: Match) = runBlocking{
         service.update(

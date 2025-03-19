@@ -24,14 +24,6 @@ class MatchParticipantService(private val client: SupabaseClient) {
         }.decodeSingle()
     }
 
-    suspend fun findMatchParticipantsByMatchId(id: Int): List<MatchParticipant>? {
-        return client.from("match_participant").select {
-            filter {
-                eq("participant_id", id)
-            }
-        }.decodeList<MatchParticipant>()
-    }
-
     suspend fun deleteMatchParticipant(id: Int){
         client.from("match_participant").delete{
             filter{

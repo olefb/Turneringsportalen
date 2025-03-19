@@ -32,11 +32,6 @@ class ParticipantController(private val service: ParticipantService) {
         service.updateParticipants(participant)
     }
 
-    @GetMapping("/{tournamentId}")
-    fun findParticipantsByTournamentId(@PathVariable tournamentId: Int) = runBlocking{
-        service.findAllTournamentParticipants(tournamentId)
-    }
-
     @DeleteMapping("/{id}")
     fun deleteParticipantById(@PathVariable id: Int) = runBlocking{
         service.deleteParticipant(id)

@@ -17,11 +17,6 @@ class TournamentFieldController(private val service: TournamentFieldService) {
     @GetMapping("/{id}")
     fun findTournamentFieldById(@PathVariable id: Int) = runBlocking { service.findTournamentFieldById(id) }
 
-    @GetMapping("/{tournamentId}")
-    fun findFieldsByTournamentId(@PathVariable tournamentId: Int) = runBlocking {
-        service.findFieldsByTournamentId(tournamentId)
-    }
-
     @PostMapping
     fun addTournamentField(@RequestBody tournamentField: TournamentField) = runBlocking {
         service.addTournamentField(tournamentField)

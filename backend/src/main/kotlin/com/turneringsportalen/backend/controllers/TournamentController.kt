@@ -52,11 +52,28 @@ class TournamentController(private val service: TournamentService, private val f
     @DeleteMapping("/{id}")
     fun deleteTournament(@PathVariable id: Int) = runBlocking { service.deleteTournament(id) }
 
-    @GetMapping("/{tournamentId}/participants")
-    fun findAllTournamentParticipants(@PathVariable tournamentId: Int) = runBlocking { service.findAllTournaments() }
+    @GetMapping("/participants")
+    fun findAllTournamentParticipants() = runBlocking { service.findAllTournaments() }
 
-    // Unsure about how necessary/useful this one is
-    @GetMapping("/participants/{participantId}")
-    fun findParticipantById(@PathVariable participantId: Int) = runBlocking { service.findTournamentById(participantId) }
 
+    // Get data from other tables for a specific tournament
+    @GetMapping("/{matchId}/participants")
+    fun findMatchParticipantsByMatchId(@PathVariable matchId: Int) = runBlocking {
+        service.findMatchParticipantsByMatchId(matchId)
+    }
+
+    @GetMapping("/{id}/matches")
+    fun findMatchesByTournamentId(@PathVariable id: Int) = runBlocking {
+        service.findMatchesByTournamentId(id)
+    }
+
+    @GetMapping("/{id}/participants")
+    fun findParticipantsByTournamentId(@PathVariable id: Int) = runBlocking{
+        service.findAllTournamentParticipants(id)
+    }
+
+    @GetMapping("/{id}/fields")
+    fun findFieldsByTournamentId(@PathVariable id: Int) = runBlocking {
+        service.findFieldsByTournamentId(id)
+    }
 }

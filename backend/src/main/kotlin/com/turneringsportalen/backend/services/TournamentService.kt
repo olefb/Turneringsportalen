@@ -114,4 +114,38 @@ class TournamentService(private val client: SupabaseClient) {
             }
         }
     }
+
+    // Functions for finding data from other tables relevant for a given tournament
+
+    suspend fun findMatchParticipantsByMatchId(id: Int): List<MatchParticipant>? {
+        return client.from("match_participant").select {
+            filter {
+                eq("participant_id", id)
+            }
+        }.decodeList<MatchParticipant>()
+    }
+
+    suspend fun findMatchesByTournamentId(id: Int): List<Match>? {
+        return client.from("match").select {
+            filter {
+                eq("tournament_id", id)
+            }
+        }.decodeList<Match>()
+    }
+
+    suspend fun findAllTournamentParticipants(id: Int): List<Participant>? {
+        return client.from("participant").select {
+            filter {
+                eq("tournament_id", id)
+            }
+        }.decodeList<Participant>()
+    }
+
+    suspend fun findFieldsByTournamentId(id: Int): List<TournamentField>? {
+        return client.from("available_fields").select {
+            filter {
+                eq("tournament_id", id)
+            }
+        }.decodeList<TournamentField>()
+    }
 }
