@@ -1,16 +1,12 @@
 package com.turneringsportalen.backend.services
 
-import com.turneringsportalen.backend.entities.Match
 import com.turneringsportalen.backend.entities.MatchParticipant
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.from
-import kotlinx.coroutines.runBlocking
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.PathVariable
 
 @Service
 class MatchParticipantService(private val client: SupabaseClient) {
-
 
     suspend fun findAllMatchParticipants(): List<MatchParticipant>{
         return client.from("match_participant").select().decodeList<MatchParticipant>()

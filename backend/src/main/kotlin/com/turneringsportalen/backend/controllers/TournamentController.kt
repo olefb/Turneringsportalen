@@ -1,6 +1,6 @@
 package com.turneringsportalen.backend.controllers
 
-import com.turneringsportalen.backend.daos.CreateTournamentDTO
+import com.turneringsportalen.backend.dto.CreateTournamentDTO
 import com.turneringsportalen.backend.entities.Tournament
 import com.turneringsportalen.backend.entities.TournamentField
 import com.turneringsportalen.backend.services.TournamentFieldService
@@ -50,4 +50,11 @@ class TournamentController(private val service: TournamentService, private val f
 
     @DeleteMapping("/{id}")
     fun deleteTournament(@PathVariable id: Int) = runBlocking { service.deleteTournament(id) }
+
+    @GetMapping("/{tournamentId}/participants")
+    fun findAllTournamentParticipants(@PathVariable tournamentId: Int) = runBlocking { service.findAllTournaments() }
+
+    // Unsure about how necessary/useful this one is
+    @GetMapping("/participants/{participantId}")
+    fun findParticipantById(@PathVariable participantId: Int) = runBlocking { service.findById(participantId) }
 }
