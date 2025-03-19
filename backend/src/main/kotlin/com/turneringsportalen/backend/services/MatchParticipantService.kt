@@ -8,9 +8,14 @@ import org.springframework.stereotype.Service
 @Service
 class MatchParticipantService(private val client: SupabaseClient) {
 
+    suspend fun addMatchParticipant(matchParticipant: MatchParticipant){
+        client.from("match_participant").insert(matchParticipant)
+    }
+
     suspend fun findAllMatchParticipants(): List<MatchParticipant>{
         return client.from("match_participant").select().decodeList<MatchParticipant>()
     }
+
     suspend fun findMatchParticipantById(id: Int): MatchParticipant{
         return client.from("match_participant").select {
             filter{
@@ -19,9 +24,12 @@ class MatchParticipantService(private val client: SupabaseClient) {
         }.decodeSingle()
     }
 
-    suspend fun addMatchParticipant(matchParticipant: MatchParticipant){
-        client.from("match_participant").insert(matchParticipant)
-
+    suspend fun findMatchParticipantsByMatchId(id: Int): List<MatchParticipant>? {
+        return client.from("match_participant").select {
+            filter {
+                eq("participant_id", id)
+            }
+        }.decodeList<MatchParticipant>()
     }
 
     suspend fun deleteMatchParticipant(id: Int){

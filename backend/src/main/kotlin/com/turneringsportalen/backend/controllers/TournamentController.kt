@@ -17,7 +17,7 @@ class TournamentController(private val service: TournamentService, private val f
     fun findAllTournaments() = runBlocking { service.findAllTournaments() }
 
     @GetMapping("/{id}")
-    fun findTournamentById(@PathVariable id: Int) = runBlocking { service.findById(id) }
+    fun findTournamentById(@PathVariable id: Int) = runBlocking { service.findTournamentById(id) }
 
     @PostMapping
     fun addNewTournament(@RequestBody tournamentDTO: CreateTournamentDTO) = runBlocking {
@@ -56,5 +56,5 @@ class TournamentController(private val service: TournamentService, private val f
 
     // Unsure about how necessary/useful this one is
     @GetMapping("/participants/{participantId}")
-    fun findParticipantById(@PathVariable participantId: Int) = runBlocking { service.findById(participantId) }
+    fun findParticipantById(@PathVariable participantId: Int) = runBlocking { service.findTournamentById(participantId) }
 }

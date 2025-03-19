@@ -1,6 +1,8 @@
 package com.turneringsportalen.backend.services
 
 import com.turneringsportalen.backend.entities.Match
+import com.turneringsportalen.backend.entities.MatchParticipant
+import com.turneringsportalen.backend.entities.Participant
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.from
 import kotlinx.datetime.Instant
@@ -8,6 +10,14 @@ import org.springframework.stereotype.Service
 
 @Service
 class MatchService(private val client: SupabaseClient) {
+
+    suspend fun addMatch(match: Match, participants: List<Participant>) {
+        client.from("match").insert(match)
+
+        for ((index, participant) in participants.withIndex()) {
+            client.from("match_participant").insert(MatchParticipant(match.matchId, participant.participantId ?: 0, index))
+        }
+    }
 
     suspend fun findAllMatches(): List<Match> {
         return client.from("match").select().decodeList<Match>()
@@ -21,16 +31,15 @@ class MatchService(private val client: SupabaseClient) {
         }.decodeSingle()
     }
 
-    suspend fun createMatch(match: Match){
-        client.from("match").insert(match)
+    suspend fun findMatchesByTournamentId(tournamentId: Int): List<Match>? {
+        return client.from("match").select {
+            filter {
+                eq("tournament_id", tournamentId)
+            }
+        }.decodeList<Match>()
     }
 
     suspend fun deleteMatch(id: Int){
-        client.from("match_participant").delete({
-            filter{
-                eq("match_id", id)
-            }
-        })
         client.from("match").delete{
             filter {
                 eq("match_id",id)
