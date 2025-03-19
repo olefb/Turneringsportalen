@@ -2,7 +2,8 @@
  * This file contains the functions to communicate with the server
  */
 
-import { CreateTournamentDTO } from "./types";
+import { CreateTournamentDTO, CreateUserDTO, LoginUserDTO } from "./types";
+
 
 const API_URL = "http://localhost:8080";
 
@@ -57,3 +58,34 @@ export async function createTournament(data: CreateTournamentDTO) {
     throw new Error("Failed to create tournament");
   }
 }
+
+export async function signUp(data: LoginUserDTO) {
+  const response = await fetch(`${API_URL}/auth/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to sign up user");
+  }
+}
+/* 
+
+export async function signIn(data: LoginUserDTO) {
+  const response = await fetch(`${API_URL}/auth/signin`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to sign in user");
+  }
+}
+ */
+
