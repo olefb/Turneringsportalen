@@ -1,7 +1,10 @@
 /**
  * This file contains the functions to communicate with the server
  */
-import { CreateTournamentDTO, CreateUserDTO, LoginUserDTO } from "./types";
+
+import { createClient } from "./supabase/server";
+import { CreateTournamentDTO } from "./types";
+
 
 const API_URL = "http://localhost:8080";
 
@@ -10,15 +13,27 @@ const API_URL = "http://localhost:8080";
  * @returns The list of tournaments
  */
 export async function fetchTournaments() {
+  try {
+    const supabase = await createClient();
+    const token = ((await supabase.auth.getSession()).data.session?.access_token)
   const response = await fetch(`${API_URL}/tournaments`, {
     method: "GET",
     cache: "no-store", // TEMP FOR TESTING, (MAYBE REMOVE LATER)
     headers: {
+        "Authorization": `Bearer ${token}`,
+
       "Content-Type": "application/json",
+
     },
   });
+    if (!response.ok) {
+      throw new Error(`Fetch error: ${response.status}`)
+    }
   const data = await response.json();
   return data;
+  } catch (error: any) {
+    console.error("An error Occured: ", error)
+  }
 }
 
 /**
@@ -48,6 +63,7 @@ export async function createTournament(data: CreateTournamentDTO) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+
     },
     body: JSON.stringify(data),
   });
@@ -56,34 +72,3 @@ export async function createTournament(data: CreateTournamentDTO) {
     throw new Error("Failed to create tournament");
   }
 }
-
-export async function signUp(data: LoginUserDTO) {
-  const response = await fetch(`${API_URL}/auth/signup`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=UTF-8",
-    },
-    body: JSON.stringify(data),
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to sign up user");
-  }
-}
-/* 
-
-export async function signIn(data: LoginUserDTO) {
-  const response = await fetch(`${API_URL}/auth/signin`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=UTF-8",
-    },
-    body: JSON.stringify(data),
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to sign in user");
-  }
-}
- */
-
