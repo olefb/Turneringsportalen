@@ -52,9 +52,6 @@ class TournamentController(private val service: TournamentService, private val f
     @DeleteMapping("/{id}")
     fun deleteTournament(@PathVariable id: Int) = runBlocking { service.deleteTournament(id) }
 
-    @GetMapping("/participants")
-    fun findAllTournamentParticipants() = runBlocking { service.findAllTournaments() }
-
 
     // Get data from other tables for a specific tournament
     @GetMapping("/{matchId}/participants")
