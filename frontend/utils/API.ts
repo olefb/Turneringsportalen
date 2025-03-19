@@ -4,7 +4,8 @@
 
 import { CreateTournamentDTO, Match, MatchParticipant } from "./types";
 
-const API_URL = "http://localhost:8080";
+// const API_URL = "http://localhost:8080";
+const API_URL = "https://turneringsportalen.onrender.com";
 
 /**
  * Method that fetches the list of tournaments from the server
