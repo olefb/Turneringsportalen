@@ -40,7 +40,8 @@ class MatchParticipantService(private val client: SupabaseClient) {
         }
     }
 
-    suspend fun updateMatchParticipants(matchId: Int, participantId: Int, index: Int){
+    // Currently no api-endpoint, pending figuring out what to give in
+    suspend fun updateMatchParticipant(matchId: Int, participantId: Int, index: Int){
         client.from("match_participant").update(
             {
             set("match_id", matchId)

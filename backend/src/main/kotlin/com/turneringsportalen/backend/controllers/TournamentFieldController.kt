@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.*
 @CrossOrigin(origins = ["http://localhost:3000"], maxAge = 3600) // Restrict to frontend
 class TournamentFieldController(private val service: TournamentFieldService) {
 
-
     @GetMapping
     fun findAllTournamentFields() = runBlocking { service.findAllTournamentFields() }
 
     @GetMapping("/{id}")
     fun findTournamentFieldById(@PathVariable id: Int) = runBlocking { service.findTournamentFieldById(id) }
+
+    @GetMapping("/{tournamentId}")
+    fun findFieldsByTournamentId(@PathVariable tournamentId: Int) = runBlocking {
+        service.findFieldsByTournamentId(tournamentId)
+    }
 
     @PostMapping
     fun addTournamentField(@RequestBody tournamentField: TournamentField) = runBlocking {

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*
 @CrossOrigin(origins = ["http://localhost:3000"], maxAge = 3600) // Restrict to frontend
 class TournamentController(private val service: TournamentService, private val fieldService: TournamentFieldService) {
 
+    // May have to return a ResponseEntity here => ResponseEntity(service.findAllTournaments(), HttpStatus.OK)
     @GetMapping
     fun findAllTournaments() = runBlocking { service.findAllTournaments() }
 
@@ -57,4 +58,5 @@ class TournamentController(private val service: TournamentService, private val f
     // Unsure about how necessary/useful this one is
     @GetMapping("/participants/{participantId}")
     fun findParticipantById(@PathVariable participantId: Int) = runBlocking { service.findTournamentById(participantId) }
+
 }
