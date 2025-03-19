@@ -1,9 +1,7 @@
 /**
  * This file contains the functions to communicate with the server
  */
-
 import { CreateTournamentDTO, CreateUserDTO, LoginUserDTO } from "./types";
-
 
 const API_URL = "http://localhost:8080";
 
