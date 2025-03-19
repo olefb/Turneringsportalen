@@ -11,7 +11,14 @@ import org.springframework.stereotype.Service
 @Service
 class MatchService(private val client: SupabaseClient) {
 
-    suspend fun addMatch(match: Match, participants: List<Participant>) {
+    // Simpler version if you wish to add participants separately
+    suspend fun createMatch(match: Match) {
+        client.from("match").insert(match)
+    }
+
+    // Adds "whole" match in one, match and its participants to relevant tables, use case is more for the algorithm after it has generated a schedule
+    // Unsure if it needs an api-endpoint, might be better to have a "in bulk" version in the tournamentService for editing after schedule has been created
+    suspend fun addMatchAndParticipants(match: Match, participants: List<Participant>) {
         client.from("match").insert(match)
 
         for ((index, participant) in participants.withIndex()) {

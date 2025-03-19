@@ -92,7 +92,6 @@ class TournamentService(private val client: SupabaseClient) {
     }
 
     suspend fun deleteTournament(id: Int) {
-        // Add Exceptions for when they should fail, currently only focused on getting it working
         client.from("tournament").delete {
             filter {
                 eq("tournament_id", id)
