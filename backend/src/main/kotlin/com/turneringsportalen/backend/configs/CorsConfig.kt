@@ -15,7 +15,7 @@ class CorsConfig {
         config.allowedOrigins = listOf("*")  // Frontend domain
         config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allowed HTTP methods
         config.allowedHeaders = listOf("*") // Allow all headers
-        config.exposedHeaders = listOf("Authorization", "Content-Type") // Expose headers if needed
+        config.exposedHeaders = listOf("Authorization", "Content-Type", "Access-Control-Allow-Origin") // Expose headers if needed
         config.allowCredentials = true // Allow cookies/credentials
         config.maxAge =3600L // Cache preflight response for1 hour
 
