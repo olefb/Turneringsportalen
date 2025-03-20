@@ -11,7 +11,7 @@ class CorsConfig {
     fun corsFilter(): CorsFilter {
         val source = UrlBasedCorsConfigurationSource()
         val config = CorsConfiguration()
-        config.allowedOrigins = listOf("https://app.vaffel.org") // Allow frontend
+        config.allowedOrigins = listOf("*") // Allow frontend
         config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allow all needed methods
         config.allowedHeaders = listOf("*") // Allow all headers
         config.allowCredentials = true // Allow credentials (if needed)
