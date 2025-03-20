@@ -12,7 +12,7 @@ class CorsConfig {
         val source = UrlBasedCorsConfigurationSource()
 
         val config = CorsConfiguration()
-        config.allowedOrigins = listOf("https://app.vaffel.org")  // Frontend domain
+        config.allowedOrigins = listOf("*")  // Frontend domain
         config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allowed HTTP methods
         config.allowedHeaders = listOf("*") // Allow all headers
         config.exposedHeaders = listOf("Authorization", "Content-Type") // Expose headers if needed
