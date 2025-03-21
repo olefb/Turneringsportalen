@@ -1,22 +1,19 @@
-import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.cors.CorsConfiguration
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource
-import org.springframework.web.filter.CorsFilter
+import org.springframework.web.servlet.config.annotation.CorsRegistry
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
-class CorsConfig {
+class WebConfig : WebMvcConfigurer {
 
-    @Bean
-    fun corsFilter(): CorsFilter {
-        val source = UrlBasedCorsConfigurationSource()
-        val config = CorsConfiguration()
-        config.allowedOrigins = listOf("http://localhost:3000") // Allow frontend
-        config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allow all needed methods
-        config.allowedHeaders = listOf("*") // Allow all headers
-        config.allowCredentials = true // Allow credentials (if needed)
-        config.maxAge = 3600L // Cache preflight for 1 hour
-        source.registerCorsConfiguration("/**", config)
-        return CorsFilter(source)
+    override fun addCorsMappings(registry: CorsRegistry) {
+        registry.addMapping("/**")
+            .allowedOrigins(
+                "http://localhost:3000",
+                "https://app.vaffel.org"
+            )
+            .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+            .allowedHeaders("*")
+            .allowCredentials(true)
+            .maxAge(3600)
     }
 }

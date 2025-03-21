@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/matchparticipant")
-@CrossOrigin(origins = ["http://localhost:3000"], maxAge = 3600)
 class MatchParticipantController(private val service: MatchParticipantService) {
 
     @GetMapping("/{id}")
