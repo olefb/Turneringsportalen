@@ -2,6 +2,7 @@
  * This file contains the functions to communicate with the server
  */
 
+import { redirect } from "next/navigation";
 import { createClient } from "./supabase/server";
 import { CreateTournamentDTO } from "./types";
 
@@ -27,12 +28,15 @@ export async function fetchTournaments() {
       },
     });
     if (!response.ok) {
+
       throw new Error(`Fetch error: ${response.status}`)
     }
     const data = await response.json();
     return data;
   } catch (error: any) {
     console.error("An error Occured: ", error)
+  } finally {
+    redirect("/error")
   }
 }
 
