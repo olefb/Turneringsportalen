@@ -2,7 +2,7 @@
  * This file contains the functions to communicate with the server
  */
 
-import { redirect } from "next/navigation";
+//import { redirect } from "next/navigation";
 import { createClient } from "./supabase/server";
 import { CreateTournamentDTO } from "./types";
 
@@ -22,9 +22,7 @@ export async function fetchTournaments() {
       cache: "no-store", // TEMP FOR TESTING, (MAYBE REMOVE LATER)
       headers: {
         "Authorization": `Bearer ${token}`,
-
         "Content-Type": "application/json",
-
       },
     });
     if (!response.ok) {
@@ -35,9 +33,8 @@ export async function fetchTournaments() {
     return data;
   } catch (error: any) {
     console.error("An error Occured: ", error)
-  } finally {
-    redirect("/error")
-  }
+  } 
+  
 }
 
 /**

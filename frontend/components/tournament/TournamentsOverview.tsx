@@ -9,6 +9,9 @@ export default async function TournamentsOverview() {
 
     console.log("TOURNAMENTS OVERVIEW", tournaments);
     
+    if (!tournaments) {
+        return (<h1></h1>);
+    }
 
     return (
         <Container>
