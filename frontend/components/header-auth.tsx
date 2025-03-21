@@ -11,6 +11,8 @@ export default function AuthButton() {
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const pathRef = useRef<string>("/");
   
+  //https://supabase.com/docs/reference/javascript/auth-onauthstatechange
+
   // Set current path using useRef on mount
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -24,13 +26,14 @@ export default function AuthButton() {
         data: { user },
       } = await supabase.auth.getUser();
       if (user) {
+        //console.log(user);
         setUserEmail(user.email ?? null);
       }
     })();
   }, []);
 
   const pathname = pathRef.current;
-  console.log("Pathname: ", pathname);
+  //console.log("Pathname: ", pathname);
 
   const navLinks = [
     { href: "/", label: "Home" },
