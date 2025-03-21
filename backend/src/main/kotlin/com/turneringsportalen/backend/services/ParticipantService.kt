@@ -48,5 +48,3 @@ class ParticipantService(private val client: SupabaseClient) {
         }
     }
 }
-
-

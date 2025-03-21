@@ -17,7 +17,7 @@ class MatchService(private val client: SupabaseClient) {
     }
 
     // Adds "whole" match in one, match and its participants to relevant tables, use case is more for the algorithm after it has generated a schedule
-    // Unsure if it needs an api-endpoint, might be better to have a "in bulk" version in the tournamentService for editing after schedule has been created
+    // Unsure if it needs an api-endpoint, might be better to have an "in bulk" version in the tournamentService for editing after schedule has been created
     suspend fun addMatchAndParticipants(match: Match, participants: List<Participant>) {
         client.from("match").insert(match)
 
