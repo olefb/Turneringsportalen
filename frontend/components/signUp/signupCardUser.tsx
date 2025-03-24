@@ -1,16 +1,15 @@
 "use client";
 
 import { signup } from "@/app/login/actions";
-import { Button, Dialog, Flex, Text, TextField, RadioGroup } from "@radix-ui/themes";
+import { Button, Dialog, Flex, Text, TextField, RadioGroup, Card, Box, Inset, Strong } from "@radix-ui/themes";
 
 import { useState } from "react";
 
-export default function SignupDialog() {
+export default function SignupDialogCardUser() {
   const [inputFields, setInputFields] = useState({
     email: "",
     password: "",
     username: "",
-    role: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,26 +24,47 @@ export default function SignupDialog() {
     formData.append("email", inputFields.email);
     formData.append("password", inputFields.password);
     formData.append("username", inputFields.username);
-    formData.append("role", inputFields.role);
+    formData.append("role", "regular_user");
 
-    
+
     //Call to authentication logic here
     await signup(formData);
 
 
     // TODO: Add authentication logic here
-    console.log("Sign up attempt with:", inputFields.email, inputFields.password, inputFields.username, inputFields.role);
+    console.log("Sign up attempt with:", inputFields.email, inputFields.password, inputFields.username, formData);
   };
 
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button size="3">Sign up</Button>
+        <Box>
+          <Card>
+            <h2 style={{ marginBottom: "1rem", textAlign: "center" }}>
+              User
+            </h2>
+            
+            <img
+              src="/spectator.png"
+              alt="Bold typography"
+              style={{
+                display: "block",
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+            <Text as="p" size="3">
+              <Strong>Regular account</Strong> allows you to save your favorite tournaments and teams for quicker access.
+            </Text>
+          </Card>
+        </Box>
+
       </Dialog.Trigger>
       <Dialog.Content style={{ maxWidth: "450px" }}>
         <Dialog.Title>Sign up</Dialog.Title>
         <Dialog.Description size="2" mb="4">
-          Create an account to create and administer tournaments.
+          Create an account to save your favorite tournaments and teams and personalize your experience.
         </Dialog.Description>
         <form onSubmit={handleSubmit}>
           <Flex direction="column" gap="3">
@@ -89,16 +109,15 @@ export default function SignupDialog() {
             </label>
             <label>
               <Text as="div" size="2" mb="1" weight="bold">
-                Role
+                Account type
               </Text>
               <RadioGroup.Root
                 name="role"
                 defaultValue="regular_user"
-                onValueChange={(value) => setInputFields({ ...inputFields, role: value })}
               >
-                <RadioGroup.Item value="regular_user">Users</RadioGroup.Item>
-                <RadioGroup.Item value="team_leader">Team leaders</RadioGroup.Item>
-                <RadioGroup.Item value="event_organizer">Organizers</RadioGroup.Item>
+                <RadioGroup.Item value="regular_user" disabled>User</RadioGroup.Item>
+                <RadioGroup.Item value="team_manager" disabled>Team Manager</RadioGroup.Item>
+                <RadioGroup.Item value="event_organizer" disabled>Event Organizer</RadioGroup.Item>
               </RadioGroup.Root>
             </label>
 

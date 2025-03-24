@@ -1,11 +1,11 @@
 "use client";
 
 import { signup } from "@/app/login/actions";
-import { Button, Dialog, Flex, Text, TextField, RadioGroup } from "@radix-ui/themes";
+import { Button, Dialog, Flex, Text, TextField, RadioGroup, Card, Box, Inset, Strong } from "@radix-ui/themes";
 
 import { useState } from "react";
 
-export default function SignupDialog() {
+export default function SignupDialogCardTeamleader() {
   const [inputFields, setInputFields] = useState({
     email: "",
     password: "",
@@ -27,7 +27,7 @@ export default function SignupDialog() {
     formData.append("username", inputFields.username);
     formData.append("role", inputFields.role);
 
-    
+
     //Call to authentication logic here
     await signup(formData);
 
@@ -39,12 +39,33 @@ export default function SignupDialog() {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button size="3">Sign up</Button>
+        <Box>
+          <Card>
+            <h2 style={{ marginBottom: "1rem", textAlign: "center" }}>
+              Team Manager
+            </h2>
+            
+            <img
+              src="/team_manager.png"
+              alt="Team Manager"
+              style={{
+                display: "block",
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+            <Text as="p" size="3">
+              <Strong>Team manager account</Strong> will allow you to create and manage teams. And register your teams for available tournaments.
+            </Text>
+          </Card>
+        </Box>
+
       </Dialog.Trigger>
       <Dialog.Content style={{ maxWidth: "450px" }}>
         <Dialog.Title>Sign up</Dialog.Title>
         <Dialog.Description size="2" mb="4">
-          Create an account to create and administer tournaments.
+          Create an account to manage your team and register for available tournaments.
         </Dialog.Description>
         <form onSubmit={handleSubmit}>
           <Flex direction="column" gap="3">
@@ -93,12 +114,11 @@ export default function SignupDialog() {
               </Text>
               <RadioGroup.Root
                 name="role"
-                defaultValue="regular_user"
-                onValueChange={(value) => setInputFields({ ...inputFields, role: value })}
+                defaultValue="team_manager"
               >
-                <RadioGroup.Item value="regular_user">Users</RadioGroup.Item>
-                <RadioGroup.Item value="team_leader">Team leaders</RadioGroup.Item>
-                <RadioGroup.Item value="event_organizer">Organizers</RadioGroup.Item>
+                <RadioGroup.Item value="regular_user" disabled>User</RadioGroup.Item>
+                <RadioGroup.Item value="team_manager" disabled>Team Manager</RadioGroup.Item>
+                <RadioGroup.Item value="event_organizer" disabled>Event Organizers</RadioGroup.Item>
               </RadioGroup.Root>
             </label>
 

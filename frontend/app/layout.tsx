@@ -8,6 +8,7 @@ import React from "react";
 
 import Footer from "@/components/footer";
 import HeaderAuth from "@/components/header-auth";
+import NavigationMenu from "@/components/navigation-menu";
 
 
 
@@ -50,7 +51,7 @@ export default async function RootLayout({
             scaling="100%"
             radius="full"
           >
-            <HeaderAuth/>
+            <NavigationMenu/>
             {children}
             <Footer/>
           </Theme>

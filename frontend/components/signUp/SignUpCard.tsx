@@ -1,11 +1,11 @@
 "use client";
 
 import { signup } from "@/app/login/actions";
-import { Button, Dialog, Flex, Text, TextField, RadioGroup } from "@radix-ui/themes";
+import { Button, Dialog, Flex, Text, TextField, RadioGroup, Card, Box, Inset, Strong } from "@radix-ui/themes";
 
 import { useState } from "react";
 
-export default function SignupDialog() {
+export default function SignupDialogCard() {
   const [inputFields, setInputFields] = useState({
     email: "",
     password: "",
@@ -27,7 +27,7 @@ export default function SignupDialog() {
     formData.append("username", inputFields.username);
     formData.append("role", inputFields.role);
 
-    
+
     //Call to authentication logic here
     await signup(formData);
 
@@ -39,7 +39,29 @@ export default function SignupDialog() {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button size="3">Sign up</Button>
+        <Box maxWidth="240px">
+          <Card>
+            <h2 style={{ marginBottom: "1rem", textAlign: "center" }}>
+              User
+            </h2>
+            
+            <img
+              src="/spectator.png"
+              alt="Bold typography"
+              style={{
+                display: "block",
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+            <Text as="p" size="3">
+              <Strong>Typography</Strong> is the art and technique of arranging type to
+              make written language legible, readable and appealing when displayed.
+            </Text>
+          </Card>
+        </Box>
+
       </Dialog.Trigger>
       <Dialog.Content style={{ maxWidth: "450px" }}>
         <Dialog.Title>Sign up</Dialog.Title>
@@ -97,7 +119,7 @@ export default function SignupDialog() {
                 onValueChange={(value) => setInputFields({ ...inputFields, role: value })}
               >
                 <RadioGroup.Item value="regular_user">Users</RadioGroup.Item>
-                <RadioGroup.Item value="team_leader">Team leaders</RadioGroup.Item>
+                <RadioGroup.Item value="team_manager">Team leaders</RadioGroup.Item>
                 <RadioGroup.Item value="event_organizer">Organizers</RadioGroup.Item>
               </RadioGroup.Root>
             </label>
