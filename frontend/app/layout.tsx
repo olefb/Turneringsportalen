@@ -7,7 +7,6 @@ import React from "react";
 
 
 import Footer from "@/components/footer";
-import HeaderAuth from "@/components/header-auth";
 import NavigationMenu from "@/components/navigation-menu";
 
 
