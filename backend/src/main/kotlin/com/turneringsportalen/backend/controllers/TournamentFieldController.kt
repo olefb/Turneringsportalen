@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/available_fields")
-@CrossOrigin(origins = ["http://localhost:3000"], maxAge = 3600) // Restrict to frontend
+//@CrossOrigin(origins = ["https://app.vaffel.org"], maxAge = 3600)
 class TournamentFieldController(private val service: TournamentFieldService) {
 
     @GetMapping

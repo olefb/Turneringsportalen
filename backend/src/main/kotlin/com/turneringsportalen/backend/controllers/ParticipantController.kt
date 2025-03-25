@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/participant")
-@CrossOrigin(origins = ["http://localhost:3000"], maxAge = 3600)
+//@CrossOrigin(origins = ["https://app.vaffel.org"], maxAge = 3600)
 class ParticipantController(private val service: ParticipantService) {
 
     @GetMapping()
